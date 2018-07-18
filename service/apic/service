@@ -1,0 +1,41 @@
+#!/bin/bash
+
+exec > >(tee -a /usr/local/osmosix/logs/service.log) 2>&1
+OSSVC_HOME=/usr/local/osmosix/service
+. /usr/local/osmosix/etc/.osmosix.sh
+. /usr/local/osmosix/etc/userenv
+. $OSSVC_HOME/utils/cfgutil.sh
+. $OSSVC_HOME/utils/install_util.sh
+. $OSSVC_HOME/utils/os_info_util.sh
+
+cmd=$1
+SVCNAME="dummy"
+SVCHOME="$OSSVC_HOME/$SVCNAME"
+USER_ENV="/usr/local/osmosix/etc/userenv"
+
+pip install pip --upgrade
+pip install acidipy
+
+case $cmd in
+    start)
+        python apic.py -m create -t $apicTN -b $apicBD -a $apicAP -e $apicEPG
+        log "[START] $SVCNAME successfully started."
+        ;;
+    stop)
+        python apic.py -m delete -t $apicTN -b $apicBD -a $apicAP -e $apicEPG
+        log "[STOP] $SVCNAME successfully stopped."
+        ;;
+    update)
+        log "[UPDATE] $SVCNAME successfully updated."
+        ;;
+    suspend)
+        log "[SUSPEND] $SVCNAME successfully suspended."
+        ;;
+    resume)
+        log "[RESUME] $SVCNAME successfully resumed."
+        ;;
+    *)
+        log "[ERROR] unknown command"
+        exit 127
+        ;;
+esac
