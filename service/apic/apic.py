@@ -51,7 +51,3 @@ if __name__ == '__main__':
     
     if mode == 'create': create_application(tn_name, bd_name, ap_name, epg_names)
     elif mode == 'delete': delete_application(tn_name, bd_name, ap_name, epg_names)
-    
-    
-
-    
