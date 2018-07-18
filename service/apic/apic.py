@@ -30,7 +30,7 @@ def delete_application(tn_name, bd_name, ap_name, epg_names):
     bd.delete()
     tenant.delete()
     controller.close()
-
+    
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     
