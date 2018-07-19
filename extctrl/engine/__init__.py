@@ -89,7 +89,7 @@ def create_epg(request, tn_name, ap_name, epg_name):
     lock.on()
     try:
         ap = controller.Tenant(tn_name).AppProfile(ap_name)
-        epg = ap.EPG.create(epg_name)
+        epg = ap.EPG.create(name=epg_name)
     except Exception as e:
         ret = {'result' : None, 'error' : str(e)}
     else:
