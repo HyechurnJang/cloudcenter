@@ -23,7 +23,7 @@ def create_tn(request, tn_name):
     return ret
 
 @rest('GET', '/apic/delete/tn')
-def delete_tn(tn_name):
+def delete_tn(request, tn_name):
     lock.on()
     try:
         controller.Tenant(tn_name).delete()
@@ -35,7 +35,7 @@ def delete_tn(tn_name):
     return ret
 
 @rest('GET', '/apic/create/bd')
-def create_bd(tn_name, bd_name):
+def create_bd(request, tn_name, bd_name):
     lock.on()
     try:
         tn = controller.Tenant(tn_name)
@@ -48,7 +48,7 @@ def create_bd(tn_name, bd_name):
     return ret
 
 @rest('GET', '/apic/delete/bd')
-def delete_bd(tn_name, bd_name):
+def delete_bd(request, tn_name, bd_name):
     lock.on()
     try:
         controller.Tenant(tn_name).BridgeDomain(bd_name).delete()
@@ -60,7 +60,7 @@ def delete_bd(tn_name, bd_name):
     return ret
 
 @rest('GET', '/apic/create/ap')
-def create_ap(tn_name, ap_name):
+def create_ap(request, tn_name, ap_name):
     lock.on()
     try:
         tn = controller.Tenant(tn_name)
@@ -73,7 +73,7 @@ def create_ap(tn_name, ap_name):
     return ret
 
 @rest('GET', '/apic/delete/ap')
-def delete_ap(tn_name, ap_name):
+def delete_ap(request, tn_name, ap_name):
     lock.on()
     try:
         controller.Tenant(tn_name).AppProfile(ap_name).delete()
@@ -85,7 +85,7 @@ def delete_ap(tn_name, ap_name):
     return ret
 
 @rest('GET', '/apic/create/epg')
-def create_epg(tn_name, ap_name, epg_name):
+def create_epg(request, tn_name, ap_name, epg_name):
     lock.on()
     try:
         ap = controller.Tenant(tn_name).AppProfile(ap_name)
@@ -98,7 +98,7 @@ def create_epg(tn_name, ap_name, epg_name):
     return ret
 
 @rest('GET', '/apic/delete/epg')
-def delete_epg(tn_name, ap_name, epg_name):
+def delete_epg(request, tn_name, ap_name, epg_name):
     lock.on()
     try:
         controller.Tenant(tn_name).AppProfile(ap_name).EPG(epg_name).delete()
